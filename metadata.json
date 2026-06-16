@@ -1,0 +1,6 @@
+{
+  "name": "Artist Jack Portfolio",
+  "description": "Premium cinematic biography & portfolio website for Artist Jack - Actor, Singer, and Lyricwriter in Chennai, Tamil Nadu.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
