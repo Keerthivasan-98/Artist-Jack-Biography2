@@ -1,10 +1,53 @@
 import { Movie, WebSeries, VideoItem, GalleryItem, MediaItem, TVSerial, Award } from './types';
 
+import aanandhaRaagamImg from '../assets/images/serialImage/Aanandha Raagam Sun tv.jpg';
+import chandralekhaImg from '../assets/images/serialImage/Chandralekha Sun tv.jpg';
+import kuladeivamImg from '../assets/images/serialImage/Kuladeivam sun tv.jpg';
+import mahalakshmiImg from '../assets/images/serialImage/Mahalakshmi sun tv.jpg';
+import saravananMeenakshiImg from '../assets/images/serialImage/Saravanan Meenakshi Vijay TV.jpg';
+import valliImg from '../assets/images/serialImage/Valli Sun tv.jpg';
+
+const imageModules = import.meta.glob('../assets/images/galleryImages/*.{jpg,jpeg,png,webp}', { eager: true });
+const dynamicGalleryImages: GalleryItem[] = [];
+const categories = ['Movies', 'Events', 'Behind the Scenes', 'Television', 'Promotional Shoots'] as const;
+
+let i = 0;
+for (const path in imageModules) {
+  const mod = imageModules[path] as any;
+  const imageUrl = mod.default || mod;
+  const category = categories[i % categories.length];
+  dynamicGalleryImages.push({
+    id: `dyn_g_${i}`,
+    category,
+    imageUrl,
+    alt: `Gallery Image ${i}`,
+    title: `Gallery Capture ${i + 1}`
+  });
+  i++;
+}
+
+const videoModules = import.meta.glob('../assets/videos/*.{mp4,webm,ogg}', { eager: true });
+const dynamicLocalVideos: VideoItem[] = [];
+
+let v_i = 0;
+for (const path in videoModules) {
+  const mod = videoModules[path] as any;
+  const videoUrl = mod.default || mod;
+  dynamicLocalVideos.push({
+    id: `local_v_${v_i}`,
+    title: `Featured Capture ${v_i + 1}`,
+    localUrl: videoUrl,
+    category: 'Showreel',
+    duration: ''
+  });
+  v_i++;
+}
+
 export const MOVIES: Movie[] = [
   {
     id: 'm1',
     title: 'Kaatrin Mozhi',
-    role: 'Supporting Actor / Singer',
+    role: 'Supporting Actor / actor',
     year: '2018',
     director: 'Radha Mohan',
     genre: 'Drama',
@@ -106,153 +149,109 @@ export const WEB_SERIES: WebSeries[] = [
 export const TV_SERIALS: TVSerial[] = [
   {
     id: 'tv1',
-    title: 'Anbe Vaa',
+    title: 'Aanandha Raagam',
     channel: 'Sun TV',
     genre: 'Family Drama',
-    year: '2021 - 2022',
-    role: 'Jeeva (Supporting Lead)',
-    description: 'A massive prime-time television hit exploring deep emotional conflicts and family bonds. Played an influential supportive family member guiding the lead protagonist.'
+    year: '2022 - Present',
+    role: 'Supporting Actor',
+    description: 'A popular family drama where Jack delivered an impactful supporting performance.',
+    imageUrl: aanandhaRaagamImg
   },
   {
     id: 'tv2',
-    title: 'Raja Rani (Season 2)',
-    channel: 'Vijay TV',
-    genre: 'Drama / Romance',
-    year: '2022',
-    role: 'Siddharth (Comic Supporting Lead)',
-    description: 'One of Star Vijay\'s highest-charting family dramas. Showcased exceptional light-hearted comedy timing and strong relational performance.'
+    title: 'Chandralekha',
+    channel: 'Sun TV',
+    genre: 'Drama',
+    year: '2014 - 2022',
+    role: 'Key Cast Member',
+    description: 'One of the longest-running Tamil soap operas featuring complex family dynamics and intense plot twists.',
+    imageUrl: chandralekhaImg
   },
   {
     id: 'tv3',
-    title: 'Supernatural Files',
-    channel: 'Zee Tamil',
-    genre: 'Mystery / Thriller',
-    year: '2020',
-    role: 'Inspector Arjun (Ensemble Cast)',
-    description: 'An episodic suspense procedural tackling occult riddles. Portrayed an analytical police inspector key to resolving complicated criminal and supernatural tracks.'
+    title: 'Kuladeivam',
+    channel: 'Sun TV',
+    genre: 'Family Drama',
+    year: '2015 - 2018',
+    role: 'Ensemble Cast',
+    description: 'A hit television series revolving around the lives of an elderly couple and their family.',
+    imageUrl: kuladeivamImg
   },
   {
     id: 'tv4',
-    title: 'Sillunu Oru Kaadhal',
-    channel: 'Colors TV',
-    genre: 'Romance / Action',
-    year: '2021',
-    role: 'Sub-Inspector Kathir',
-    description: 'A popular soap revolving around an IPS officer\'s marital and professional responsibilities. Featured in a disciplined law enforcement role.'
+    title: 'Mahalakshmi',
+    channel: 'Sun TV',
+    genre: 'Drama',
+    year: '2017 - 2019',
+    role: 'Supporting Role',
+    description: 'A classic television narrative showcasing strong performances in a multi-generational storyline.',
+    imageUrl: mahalakshmiImg
   },
   {
     id: 'tv5',
-    title: 'Kadal Kadhandhu Udhyogam',
-    channel: 'Raj TV',
-    genre: 'Urban Comedy',
-    year: '2020',
-    role: 'Ganesh (Parallel Lead)',
-    description: 'A humorous sitcom tracking corporate workers dealing with office politics. Starred as an aspirational employee executing high-impact comedic situations.'
+    title: 'Saravanan Meenakshi',
+    channel: 'Vijay TV',
+    genre: 'Romance / Drama',
+    year: '2011 - 2018',
+    role: 'Notable Character',
+    description: 'A wildly popular romantic drama that defined a generation of television viewing on Vijay TV.',
+    imageUrl: saravananMeenakshiImg
   },
   {
     id: 'tv6',
-    title: 'Chithi 2',
+    title: 'Valli',
     channel: 'Sun TV',
     genre: 'Drama',
-    year: '2020',
-    role: 'Dr. Santosh (Cameo)',
-    description: 'A beloved mega-serial showcasing familial duties. Played a professional medical consultant vital to steering critical plot-points and health arcs.'
-  },
-  {
-    id: 'tv7',
-    title: 'Bharathi Kannamma',
-    channel: 'Vijay TV',
-    genre: 'Melodrama',
-    year: '2021',
-    role: 'Pradeep (Supporting)',
-    description: 'A widely recognized television drama addressing social and family expectations. Portrayed a voice of reason supporting the protagonist.'
+    year: '2012 - 2019',
+    role: 'Cast Member',
+    description: 'A dramatic tale of resilience and family duties, standing as one of Sun TV\'s flagship programs.',
+    imageUrl: valliImg
   }
 ];
 
 export const VIDEOS: VideoItem[] = [
   {
     id: 'v1',
-    title: 'Artist Jack Official Showreel 2026',
-    youtubeId: 'dGXJ1rc0RsA',
-    thumbnailUrl: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=600&auto=format&fit=crop',
+    title: 'Gurkha Movie | Full Comedy Scene | Part 1',
+    youtubeId: 'dGXJ1rc0RtA',
+    thumbnailUrl: 'https://img.youtube.com/vi/dGXJ1rc0RtA/hqdefault.jpg',
     category: 'Showreel',
-    duration: '3:15'
+    duration: '4:21'
   },
   {
     id: 'v2',
-    title: '“Neeye” - Indie Tamil Acoustic Session by Jack',
+    title: 'Asuraguru Movie Part 1 | Vikram Prabhu, Yogi Babu',
     youtubeId: '9jHaIAFh0LM',
-    thumbnailUrl: 'https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=600&auto=format&fit=crop',
-    category: 'Song',
-    duration: '4:02'
+    thumbnailUrl: 'https://img.youtube.com/vi/9jHaIAFh0LM/hqdefault.jpg',
+    category: 'Showreel',
+    duration: '6:18'
   },
   {
     id: 'v3',
-    title: 'Behind the Voice: Exclusive Studio Interview with Jack',
+    title: 'If Kaatrin Mozhi was a thriller movie',
     youtubeId: 'Kn6txoX7q3w',
-    thumbnailUrl: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=600&auto=format&fit=crop',
-    category: 'Interview',
-    duration: '12:45'
-  }
+    thumbnailUrl: 'https://img.youtube.com/vi/Kn6txoX7q3w/hqdefault.jpg',
+    category: 'Showreel',
+    duration: '1:44'
+  },
+  ...[
+    'lOCxLaCwTgY', 'fWIFCFFb4PU', 'sdcsPN7YNso', '2p5IEH2NU5k', 'pFbQNsmhyz8',
+    'zce9ubIR2Vc', '-wacO822eNs', 'a2LpoYhZWZU', 'n7PBNCMMt70', 'HARpiJxJB38',
+    'Bcwe9TgvuRY', 's4DzbUWJIb8', '-l48SP1D0F0', '2KXMITa8w9Q', '4DRpHW5nHYg',
+    'SG6JM5TeXMU', 'HPXCGjdEA6g', '2Mew4Qyr7OU', 'eDZ0uUbfeTI'
+  ].map((id, idx) => ({
+    id: `v${idx + 4}`,
+    title: `Featured Media ${idx + 1}`,
+    youtubeId: id,
+    thumbnailUrl: `https://img.youtube.com/vi/${id}/hqdefault.jpg`,
+    category: 'Showreel',
+    duration: ''
+  })),
+  ...dynamicLocalVideos
 ];
 
 export const GALLERY: GalleryItem[] = [
-  {
-    id: 'g1',
-    category: 'Movies',
-    imageUrl: 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=600&auto=format&fit=crop',
-    alt: 'Kaatrin Mozhi on-set action with directors',
-    title: 'Kaatrin Mozhi Filming'
-  },
-  {
-    id: 'g2',
-    category: 'Events',
-    imageUrl: 'https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=600&auto=format&fit=crop',
-    alt: 'Jack performing on stage at audio launch',
-    title: 'Audio Launch Performance'
-  },
-  {
-    id: 'g3',
-    category: 'Promotional Shoots',
-    imageUrl: 'https://images.unsplash.com/photo-1485206412491-9a79559348a2?q=80&w=600&auto=format&fit=crop',
-    alt: 'Studio portrait of Actor Jack',
-    title: 'Modern Classic Portait'
-  },
-  {
-    id: 'g4',
-    category: 'Behind the Scenes',
-    imageUrl: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=600&auto=format&fit=crop',
-    alt: 'Jack reviewing script on set of Auto Shankar',
-    title: 'Auto Shankar script read'
-  },
-  {
-    id: 'g5',
-    category: 'Television',
-    imageUrl: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=600&auto=format&fit=crop',
-    alt: 'Jack as guest mentor on reality TV show',
-    title: 'TV Reality Star Guest Panel'
-  },
-  {
-    id: 'g6',
-    category: 'Movies',
-    imageUrl: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=600&auto=format&fit=crop',
-    alt: 'Dramatic police confrontation scene in Kuttram Purinthal',
-    title: 'Action Sequence Stunt Set'
-  },
-  {
-    id: 'g7',
-    category: 'Promotional Shoots',
-    imageUrl: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=600&auto=format&fit=crop',
-    alt: 'Sleek premium suit photoshoot for brand endorsement',
-    title: 'Luxury Suit Shoot'
-  },
-  {
-    id: 'g8',
-    category: 'Behind the Scenes',
-    imageUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=600&auto=format&fit=crop',
-    alt: 'Jack recording vocals in soundproof studio',
-    title: 'Unplugged Dubbing Session'
-  }
+  ...dynamicGalleryImages
 ];
 
 export const MEDIA: MediaItem[] = [
@@ -283,7 +282,7 @@ export const MEDIA: MediaItem[] = [
 ];
 
 export const STATS = [
-  { label: 'Feature Films', value: '7+' },
+  { label: 'Feature Films', value: '20+' },
   { label: 'Short Films', value: '10+' },
   { label: 'Web Series', value: '2' },
   { label: 'TV Appearances', value: 'Multiple' }
@@ -348,7 +347,7 @@ export const AWARDS: Award[] = [
   {
     id: 'a4',
     title: 'Chennai Indie Music Awards',
-    category: 'Best Independent Lyricist & Singer',
+    category: 'Best Independent actor & actor',
     year: '2022',
     description: 'Recognized for outstanding vocal performance and meaningful lyrics in independent Tamil acoustic folk compositions.',
     filterType: 'Music',

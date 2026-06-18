@@ -1,26 +1,32 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowUp, Heart, Youtube, Instagram, MessageCircle, MessageSquare } from 'lucide-react';
+import { ArrowUp, ArrowRight } from 'lucide-react';
+import { FaInstagram, FaYoutube, FaWhatsapp } from 'react-icons/fa';
 import { useLanguage } from '../context/LanguageContext';
+import logoImg from '../../assets/images/logo/logo-jack.png';
 
-export default function Footer() {
+interface FooterProps {
+  setCurrentPage?: (page: 'home' | 'privacy' | 'terms') => void;
+}
+
+export default function Footer({ setCurrentPage }: FooterProps) {
   const { t } = useLanguage();
 
   const socialLinks = [
     {
-      icon: <Instagram size={16} />,
+      icon: <FaInstagram size={18} />,
       url: 'https://www.instagram.com/actor_jack_official',
       id: 'footer-social-instagram',
       label: 'Instagram',
     },
     {
-      icon: <Youtube size={16} />,
+      icon: <FaYoutube size={18} />,
       url: 'https://youtube.com/@actorjack.07',
       id: 'footer-social-youtube',
       label: 'YouTube',
     },
     {
-      icon: <MessageCircle size={16} />,
+      icon: <FaWhatsapp size={18} />,
       url: 'https://whatsapp.com/channel/0029Vaj18oXDJ6Gyp2Kaev18',
       id: 'footer-social-whatsapp',
       label: 'WhatsApp Channel',
@@ -36,122 +42,175 @@ export default function Footer() {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) {
-      const offsetTop = element.offsetTop - 80;
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth',
-      });
-    }
+    if (setCurrentPage) setCurrentPage('home');
+
+    setTimeout(() => {
+      const element = document.getElementById(id);
+      if (element) {
+        const offsetTop = element.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth',
+        });
+      }
+    }, 100);
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
   };
 
   return (
-    <footer className="bg-[#050505] border-t border-white/5 pt-16 pb-8 text-left relative overflow-hidden">
-      <div className="absolute bottom-0 right-0 left-0 h-[2px] bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-transparent pointer-events-none" />
+    <footer className="bg-[#030303] border-t border-white/5 pt-20 pb-6 text-left relative overflow-hidden">
+      {/* Background ambient glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
+      <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[200px] bg-[#D4AF37]/5 blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 border-b border-white/5 pb-10">
-          
+      <motion.div
+        className="max-w-7xl mx-auto px-6 relative z-10"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+      >
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 border-b border-white/10 pb-12">
+
           {/* Bio text block */}
-          <div className="md:col-span-5 space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="p-1 px-2 border border-yellow-500/20 bg-yellow-500/5 rounded">
-                <span className="text-[10px] font-mono tracking-widest text-[#D4AF37] font-bold">AJ</span>
-              </div>
-              <span className="text-sm font-serif font-bold tracking-widest text-white uppercase">{t('footer.brand') || 'ARTIST JACK'}</span>
+          <motion.div variants={itemVariants} className="md:col-span-5 flex flex-col justify-between">
+            <div>
+              <a href="#home" className="flex items-center gap-3 group cursor-pointer inline-block" onClick={(e) => handleNavClick(e, 'home')}>
+                <img src={logoImg} alt="Actor Jack Prabhu Logo" className="h-20 md:h-30 w-auto object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.2)] group-hover:drop-shadow-[0_0_25px_rgba(212,175,55,0.4)] transition-all duration-500" />
+              </a>
+
+              <p className="mt-6 text-sm text-gray-400 max-w-sm leading-relaxed font-sans">
+                {t('footer.desc') || 'Tamil Actor based in Chennai. Presenting cinematic truth to audiences across movies, television, and digital platforms.'}
+              </p>
             </div>
-            
-            <p className="text-xs text-gray-500 max-w-sm leading-relaxed font-sans">
-              {t('footer.desc') || 'Tamil Actor, Independent Musician, and Singer based in Chennai. Presenting cinematic truth and acoustic sound to audiences across movies, television, and digital platforms.'}
-            </p>
-          </div>
+
+            <div className="mt-8">
+              <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} className="inline-flex items-center gap-2 text-sm font-mono text-white hover:text-[#D4AF37] transition-colors group">
+                <span className="border-b border-[#D4AF37]/30 group-hover:border-[#D4AF37] pb-1 transition-colors">Let's work together</span>
+                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
+          </motion.div>
 
           {/* Navigation Links column */}
-          <div className="md:col-span-4 grid grid-cols-2 gap-4">
+          <motion.div variants={itemVariants} className="md:col-span-4 grid grid-cols-2 gap-8">
             <div>
-              <h5 className="text-[10px] font-mono font-bold tracking-widest text-gray-400 uppercase mb-4">{t('footer.navigations') || 'Navigations'}</h5>
-              <ul className="space-y-2 text-xs">
-                <li>
-                  <a href="#home" onClick={(e) => handleNavClick(e, 'home')} className="text-gray-500 hover:text-[#D4AF37] transition-all">{t('nav.home') || 'Home'}</a>
-                </li>
-                <li>
-                  <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="text-gray-500 hover:text-[#D4AF37] transition-all">{t('nav.about') || 'About'}</a>
-                </li>
-                <li>
-                  <a href="#filmography" onClick={(e) => handleNavClick(e, 'filmography')} className="text-gray-500 hover:text-[#D4AF37] transition-all">{t('nav.filmography') || 'Film Credits'}</a>
-                </li>
-                <li>
-                  <a href="#videos" onClick={(e) => handleNavClick(e, 'videos')} className="text-gray-500 hover:text-[#D4AF37] transition-all">{t('nav.videos') || 'Videos'}</a>
-                </li>
+              <h5 className="text-xs font-mono font-semibold tracking-widest text-white uppercase mb-6 flex items-center gap-2">
+                <span className="w-2 h-2 bg-[#D4AF37] rounded-sm"></span>
+                {t('footer.navigations') || 'Navigations'}
+              </h5>
+              <ul className="space-y-3.5 text-sm">
+                {['home', 'about', 'filmography', 'videos'].map((item) => (
+                  <li key={item}>
+                    <a href={`#${item}`} onClick={(e) => handleNavClick(e, item)} className="group flex items-center text-gray-400 hover:text-white transition-all">
+                      <span className="w-0 overflow-hidden group-hover:w-3 group-hover:mr-2 h-[1px] bg-[#D4AF37] transition-all duration-300"></span>
+                      {t(`nav.${item}`) || item.charAt(0).toUpperCase() + item.slice(1)}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
 
             <div>
-              <h5 className="text-[10px] font-mono font-bold tracking-widest text-gray-400 uppercase mb-4">{t('footer.sections') || 'Sections'}</h5>
-              <ul className="space-y-2 text-xs">
-                <li>
-                  <a href="#webseries" onClick={(e) => handleNavClick(e, 'webseries')} className="text-gray-500 hover:text-[#D4AF37] transition-all">{t('nav.webseries') || 'Web Series'}</a>
-                </li>
-                <li>
-                  <a href="#gallery" onClick={(e) => handleNavClick(e, 'gallery')} className="text-gray-500 hover:text-[#D4AF37] transition-all">{t('nav.gallery') || 'Gallery'}</a>
-                </li>
-                <li>
-                  <a href="#media" onClick={(e) => handleNavClick(e, 'media')} className="text-gray-500 hover:text-[#D4AF37] transition-all">{t('nav.media') || 'Media'}</a>
-                </li>
-                <li>
-                  <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} className="text-gray-500 hover:text-[#D4AF37] transition-all">{t('nav.contact') || 'Contact'}</a>
-                </li>
+              <h5 className="text-xs font-mono font-semibold tracking-widest text-white uppercase mb-6 flex items-center gap-2">
+                <span className="w-2 h-2 bg-[#D4AF37] rounded-sm opacity-50"></span>
+                {t('footer.sections') || 'Sections'}
+              </h5>
+              <ul className="space-y-3.5 text-sm">
+                {['webseries', 'gallery', 'media', 'contact'].map((item) => (
+                  <li key={item}>
+                    <a href={`#${item}`} onClick={(e) => handleNavClick(e, item)} className="group flex items-center text-gray-400 hover:text-white transition-all">
+                      <span className="w-0 overflow-hidden group-hover:w-3 group-hover:mr-2 h-[1px] bg-[#D4AF37] transition-all duration-300"></span>
+                      {t(`nav.${item}`) || item.charAt(0).toUpperCase() + item.slice(1)}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
-          </div>
+          </motion.div>
 
           {/* Social connections */}
-          <div className="md:col-span-3 space-y-4">
-            <h5 className="text-[10px] font-mono font-bold tracking-widest text-gray-400 uppercase mb-4">{t('footer.channels') || 'Official Channels'}</h5>
-            <div className="flex gap-2">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.id}
-                  id={social.id}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 rounded-lg bg-[#121212] border border-white/5 hover:border-yellow-500/30 hover:bg-[#D4AF37]/5 text-gray-400 hover:text-[#D4AF37] transition-all duration-300 flex items-center justify-center shrink-0"
-                  aria-label={social.label}
-                >
-                  {social.icon}
-                </a>
-              ))}
+          <motion.div variants={itemVariants} className="md:col-span-3 flex flex-col justify-between">
+            <div>
+              <h5 className="text-xs font-mono font-semibold tracking-widest text-white uppercase mb-6 flex items-center gap-2">
+                <span className="w-2 h-2 bg-transparent border border-[#D4AF37] rounded-sm"></span>
+                {t('footer.channels') || 'Connect'}
+              </h5>
+              <div className="flex flex-wrap gap-3">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.id}
+                    id={social.id}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full bg-white/5 border border-white/10 hover:border-[#D4AF37] hover:bg-[#D4AF37]/10 text-gray-400 hover:text-[#D4AF37] transition-all duration-300 flex items-center justify-center shrink-0 hover:-translate-y-1 hover:shadow-[0_5px_15px_rgba(212,175,55,0.15)]"
+                    aria-label={social.label}
+                  >
+                    {social.icon}
+                  </a>
+                ))}
+              </div>
             </div>
-            
-            <p className="text-[10px] text-gray-600 leading-normal font-sans pt-1">
-              {t('footer.social_info') || 'Follow Artist Jack on social handles to get instant previews of updates from filmmaking studios and recording boxes.'}
+
+            <p className="mt-8 text-xs text-gray-500 leading-relaxed font-sans">
+              {t('footer.social_info') || 'Follow Actor Jack Prabhu on social handles to get instant previews of updates from filmmaking studios.'}
             </p>
-          </div>
+          </motion.div>
 
         </div>
 
+        {/* Massive Text Watermark */}
+        <motion.div
+          variants={itemVariants}
+          className="w-full py-12 flex justify-center items-center overflow-hidden select-none pointer-events-none opacity-[0.03]"
+        >
+          <span className="text-[12vw] md:text-[10vw] font-serif font-black whitespace-nowrap leading-none tracking-tighter bg-gradient-to-b from-white to-white/30 bg-clip-text text-transparent pb-4">
+            JACK PRABHU
+          </span>
+        </motion.div>
+
         {/* Copyright block */}
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 text-xs text-gray-600 font-mono">
-          <div className="flex items-center gap-1.5 justify-center sm:justify-start">
-            <span>{t('footer.rights') ? t('footer.rights').replace('2026', new Date().getFullYear().toString()) : `© ${new Date().getFullYear()} Artist Jack. All rights reserved.`}</span>
+        <motion.div variants={itemVariants} className="flex flex-col md:flex-row justify-between items-center gap-4 pt-4 border-t border-white/5 text-xs text-gray-500 font-mono">
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 text-center md:text-left">
+            <span>{t('footer.rights') ? t('footer.rights').replace('2026', new Date().getFullYear().toString()) : `© ${new Date().getFullYear()} Actor Jack Prabhu. All rights reserved.`}</span>
+            <div className="hidden md:block w-px h-3 bg-white/20"></div>
+            <div className="flex items-center gap-3">
+              <button onClick={() => { if (setCurrentPage) { setCurrentPage('privacy'); window.scrollTo(0, 0); } }} className="hover:text-[#D4AF37] transition-colors cursor-pointer">Privacy Policy</button>
+              <span className="text-white/20">|</span>
+              <button onClick={() => { if (setCurrentPage) { setCurrentPage('terms'); window.scrollTo(0, 0); } }} className="hover:text-[#D4AF37] transition-colors cursor-pointer">Terms & Conditions</button>
+            </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            <span>{t('hero.chennai') || 'Chennai, Tamil Nadu, India'}</span>
+          <div className="flex flex-col sm:flex-row items-center gap-6">
+            <span className="hidden sm:inline-block">{t('hero.chennai') || 'Chennai, Tamil Nadu, India'}</span>
             <button
               id="back-to-top-btn"
               onClick={handleScrollToTop}
-              className="p-1 px-2.5 bg-[#D4AF37]/5 hover:bg-[#D4AF37] hover:text-black border border-[#D4AF37]/30 hover:border-[#D4AF37] rounded text-[10px] font-mono flex items-center gap-1 tracking-wider transition-all duration-300 cursor-pointer text-[#D4AF37]"
+              className="relative group flex items-center justify-center w-10 h-10 rounded-full bg-[#D4AF37] border border-[#D4AF37] transition-all duration-500 cursor-pointer text-black shadow-[0_0_15px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(212,175,55,0.9)] hover:animate-pulse"
+              aria-label="Back to top"
             >
-              <ArrowUp size={11} />
-              {t('footer.top') || 'TOP'}
+              <span className="absolute inset-0 rounded-full bg-[#D4AF37] opacity-40 animate-ping group-hover:opacity-0 transition-all duration-700 pointer-events-none" />
+              <ArrowUp size={16} className="relative z-10 animate-bounce group-hover:animate-none group-hover:-translate-y-1 group-hover:scale-125 transition-all duration-300" />
             </button>
           </div>
-        </div>
+        </motion.div>
 
-      </div>
+      </motion.div>
     </footer>
   );
 }

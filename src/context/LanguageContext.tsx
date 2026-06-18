@@ -59,27 +59,15 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     } as WebSeries;
   });
 
-  const tvList = dict['data.tvserials'].map((transTv) => {
-    const original = TV_SERIALS.find((t) => t.id === transTv.id);
-    return {
-      ...original,
-      ...transTv,
-    } as TVSerial;
-  });
+  const tvList = TV_SERIALS;
 
-  const videosList = dict['data.videos'].map((transVideo) => {
-    const original = VIDEOS.find((v) => v.id === transVideo.id);
-    return {
-      ...original,
-      ...transVideo,
-    } as VideoItem;
-  });
+  const videosList = VIDEOS;
 
-  const galleryList = dict['data.gallery'].map((transGallery) => {
-    const original = GALLERY.find((g) => g.id === transGallery.id);
+  const galleryList = GALLERY.map((original) => {
+    const transGallery = dict['data.gallery'].find((g) => g.id === original.id);
     return {
       ...original,
-      ...transGallery,
+      ...(transGallery || {}),
     } as GalleryItem;
   });
 

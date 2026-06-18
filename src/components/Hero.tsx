@@ -1,7 +1,8 @@
 import { motion } from 'motion/react';
 import { Play, Sparkles, Film, ArrowDown, Award } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
-import artistJackImage from '@/Artist-Jack.png';
+import artistJackImage from '../../assets/images/galleryImages/Actor JackPrabhu.png';
+import cinemaBg from '../assets/images/hero/cinema-bg.png';
 
 interface HeroProps {
   onCTA1Click: () => void; // Explore Journey
@@ -16,15 +17,28 @@ export default function Hero({ onCTA1Click, onCTA2Click }: HeroProps) {
       id="home"
       className="relative min-h-screen flex items-center justify-center bg-[#0A0A0A] pt-16 overflow-hidden select-none"
     >
+      {/* Cinematic Industry Animated Background */}
+      <motion.div
+        className="absolute inset-0 z-0 opacity-[0.15]"
+        initial={{ scale: 1 }}
+        animate={{ scale: 1.15 }}
+        transition={{ duration: 25, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+        style={{
+          backgroundImage: `url(${cinemaBg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      />
       {/* Cinematic Grid & Glow Effect Background */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_30%,rgba(212,175,55,0.08),transparent_45%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(18,18,18,0.9),transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_30%,rgba(212,175,55,0.08),transparent_45%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(18,18,18,0.9),transparent_60%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/30 via-transparent to-[#0A0A0A] pointer-events-none" />
       
       {/* Subtle animated light beams */}
       <div className="absolute -top-40 left-1/4 w-[1px] h-[500px] bg-gradient-to-b from-yellow-500/0 via-yellow-500/10 to-yellow-500/0 transform rotate-12 blur-sm" />
       <div className="absolute -bottom-40 right-1/4 w-[1px] h-[500px] bg-gradient-to-b from-yellow-500/0 via-yellow-500/10 to-yellow-500/0 transform rotate-12 blur-sm" />
 
-      <div className="max-w-7xl mx-auto px-6 w-full py-12 md:py-20 flex flex-col-reverse lg:flex-row items-center justify-between gap-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 w-full pt-12 pb-28 md:pt-20 md:pb-32 flex flex-col-reverse lg:flex-row items-center justify-between gap-12 relative z-10">
         {/* Left: Text Contents */}
         <div className="flex-1 text-center lg:text-left">
           {/* Tag / Status */}
@@ -48,7 +62,7 @@ export default function Hero({ onCTA1Click, onCTA2Click }: HeroProps) {
             transition={{ duration: 0.8, delay: 0.1 }}
           >
             <span className="text-gray-400 block text-2xl md:text-3xl font-mono font-medium tracking-[0.2em] mb-2">{t('hero.artist')}</span>
-            JACK<span className="text-[#D4AF37]">.</span>
+            JACK PRABHU<span className="text-[#D4AF37]">.</span>
           </motion.h1>
 
           {/* Profession Subheading */}
@@ -60,10 +74,6 @@ export default function Hero({ onCTA1Click, onCTA2Click }: HeroProps) {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <span>{t('hero.actor')}</span>
-            <span className="w-1.5 h-1.5 bg-[#D4AF37] opacity-60 rounded-full" />
-            <span>{t('hero.singer')}</span>
-            <span className="w-1.5 h-1.5 bg-[#D4AF37] opacity-60 rounded-full" />
-            <span>{t('hero.lyricwriter')}</span>
           </motion.div>
 
           {/* Short Bio Description */}
@@ -146,8 +156,8 @@ export default function Hero({ onCTA1Click, onCTA2Click }: HeroProps) {
               {/* Actual photo matching the user's uploaded image perfectly */}
               <img
                 src={artistJackImage}
-                alt="Artist Jack dramatic studio portrait"
-                className="w-full h-full object-cover grayscale brightness-95 contrast-105 group-hover:scale-105 transition-transform duration-700 pointer-events-none"
+                alt="Actor Jack Prabhu dramatic studio portrait"
+                className="w-full h-full object-cover brightness-95 contrast-105 group-hover:scale-105 transition-transform duration-700 pointer-events-none"
                 referrerPolicy="no-referrer"
               />
 

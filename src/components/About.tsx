@@ -36,12 +36,29 @@ export default function About() {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center md:text-left mb-16">
-          <p className="text-xs font-mono font-medium tracking-[0.3em] text-[#D4AF37] uppercase mb-3">{t('about.journey')}</p>
-          <h2 className="text-3xl md:text-5xl font-bold font-serif text-white tracking-tight leading-none">
-            {t('about.title')}<span className="text-[#D4AF37]">.</span>
-          </h2>
-          <div className="w-16 h-[2px] bg-[#D4AF37] mt-6 mx-auto md:mx-0" />
+        <div className="text-left mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-yellow-500/20 bg-yellow-500/5 mb-4"
+          >
+            <Sparkles size={14} className="text-[#D4AF37]" />
+            <span className="text-[10px] font-mono tracking-widest text-[#D4AF37] uppercase font-semibold">
+              {t('about.journey')}
+            </span>
+          </motion.div>
+          
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold tracking-tight text-white mb-6 text-left"
+          >
+            {t('about.title')}
+          </motion.h2>
         </div>
 
         {/* Intro & Core Bio Block */}
@@ -58,7 +75,7 @@ export default function About() {
             </p>
             
             {/* Quick stats grid */}
-            <div className="grid grid-cols-3 gap-6 pt-6 border-t border-white/5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 gap-y-8 pt-6 border-t border-white/5">
               <div>
                 <p className="text-xs font-mono text-gray-500 uppercase">{t('about.active')}</p>
                 <p className="text-lg font-serif font-semibold text-white mt-1">2016</p>

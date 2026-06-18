@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import { motion, useScroll, useSpring } from 'motion/react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import { useAeoSeoGeoHead } from './components/AeoSeoGeoOptimizer';
@@ -16,9 +17,22 @@ import Gallery from './components/Gallery';
 import Media from './components/Media';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import  TermsConditions from './components/TermsConditions';
+
+
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'privacy' | 'terms'>('home');
+
+  // Animated Scroll Progress
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   // Dynamic AEO, SEO, GEO head tags and metadata sync
   useAeoSeoGeoHead(activeSection);
@@ -28,9 +42,9 @@ export default function App() {
     const jsonLd = {
       '@context': 'https://schema.org',
       '@type': 'Person',
-      'name': 'Artist Jack (Actor Jack)',
+      'name': 'Actor Jack Prabhu',
       'alternateName': 'Jack',
-      'jobTitle': 'Actor, Singer, Lyricwriter',
+      'jobTitle': 'Actor',
       'gender': 'Male',
       'address': {
         '@type': 'PostalAddress',
@@ -141,11 +155,17 @@ export default function App() {
 
   return (
     <div id="portfolio-container" className="min-h-screen bg-[#0A0A0A] text-white selection:bg-yellow-500 selection:text-black">
-      {/* Dynamic Header */}
-      <Navbar activeSection={activeSection} setActiveSection={setActiveSection} />
+      {/* Animated Scroll Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-600 via-[#D4AF37] to-yellow-300 origin-left z-[100]"
+        style={{ scaleX }}
+      />
 
-      {/* Primary Scrollable Sections */}
-      <main id="portfolio-main-grid" className="relative">
+      {/* Dynamic Header */}
+      <Navbar activeSection={activeSection} setActiveSection={setActiveSection} setCurrentPage={setCurrentPage} />
+
+      {currentPage === 'home' ? (
+        <main id="portfolio-main-grid" className="relative">
         <Hero
           onCTA1Click={() => handleScrollToSegment('about')}
           onCTA2Click={() => handleScrollToSegment('media')}
@@ -158,10 +178,15 @@ export default function App() {
         <Gallery />
         <Media />
         <Contact />
-      </main>
+        </main>
+      ) : currentPage === 'privacy' ? (
+        <PrivacyPolicy setCurrentPage={setCurrentPage} />
+      ) : (
+        <TermsConditions setCurrentPage={setCurrentPage} />
+      )}
 
       {/* Footer credits and social hubs */}
-      <Footer />
+      <Footer setCurrentPage={setCurrentPage} />
     </div>
   );
 }

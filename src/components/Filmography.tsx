@@ -31,32 +31,77 @@ export default function Filmography() {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-          <div className="text-left">
-            <p className="text-xs font-mono font-medium tracking-[0.3em] text-[#D4AF37] uppercase mb-3">{t('films.cinematic')}</p>
-            <h2 className="text-3xl md:text-5xl font-bold font-serif text-white tracking-tight leading-none">
-              {t('films.title')}<span className="text-[#D4AF37]">.</span>
-            </h2>
-            <div className="w-16 h-[2px] bg-[#D4AF37] mt-6" />
-          </div>
+        <div className="text-left mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-yellow-500/20 bg-yellow-500/5 mb-4"
+          >
+            <FilmIcon size={14} className="text-[#D4AF37]" />
+            <span className="text-[10px] font-mono tracking-widest text-[#D4AF37] uppercase font-semibold">
+              {t('films.cinematic')}
+            </span>
+          </motion.div>
+          
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold tracking-tight text-white mb-6 text-left leading-snug"
+          >
+            {t('films.title')}
+          </motion.h2>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-sm sm:text-base text-gray-400 font-sans leading-relaxed text-left max-w-3xl"
+          >
+            {t('films.desc')}
+          </motion.p>
+        </div>
 
-          {/* Genre Filters Row */}
-          <div className="flex flex-wrap gap-2 bg-[#121212]/50 border border-white/5 p-1 rounded-lg backdrop-blur-sm self-start">
-            {genres.map((genre) => (
+        {/* Genre Filters Row */}
+        <div className="flex flex-wrap justify-start gap-3 mb-16 overflow-x-auto pb-4 scrollbar-none">
+          {genres.map((genre) => {
+            const isSelected = selectedGenre === genre;
+            const genreIcons: Record<string, string> = {
+              'All': '',
+              'Action': '🔥',
+              'Drama': '🎭',
+              'Comedy': '😂',
+              'Thriller': '🔪'
+            };
+            return (
               <button
                 key={genre}
-                id={`genre-filter-${genre}`}
+                id={`genre-filter-${genre.replace(/\s+/g, '-').toLowerCase()}`}
                 onClick={() => setSelectedGenre(genre)}
-                className={`px-4 py-2 text-xs font-mono rounded-md tracking-wider transition-all duration-300 ${
-                  selectedGenre === genre
-                    ? 'bg-[#D4AF37] text-black font-semibold'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                className={`relative px-4 py-2 border rounded-full text-xs font-mono tracking-wider transition-all duration-300 whitespace-nowrap ${
+                  isSelected
+                    ? 'border-[#D4AF37] text-[#D4AF37] font-semibold'
+                    : 'border-white/5 bg-white/5 text-gray-400 hover:text-white hover:border-white/10'
                 }`}
               >
-                {genre}
+                {isSelected && (
+                  <motion.span
+                    layoutId="activeFilmTab"
+                    className="absolute inset-0 bg-[#D4AF37]/10 rounded-full z-0 border border-[#D4AF37]"
+                    transition={{ type: 'spring', stiffness: 350, damping: 28 }}
+                  />
+                )}
+                <span className="relative z-10 flex items-center gap-1.5 uppercase">
+                  {genreIcons[genre] && <span>{genreIcons[genre]}</span>}
+                  {genre}
+                </span>
               </button>
-            ))}
-          </div>
+            );
+          })}
         </div>
 
         {/* Movie Cards Container with layout animation */}
@@ -83,7 +128,7 @@ export default function Filmography() {
                   
                   {/* Subtle vignette layer */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#121212] via-transparent to-transparent z-10 opacity-70" />
-                  <div className="absolute inset-0 bg-[#0A0A0A]/40 group-hover:bg-[#0A0A0A]/10 transition-all duration-500 z-10" />
+                  <div className="absolute inset-0 bg-[#0A0A0A]/10 group-hover:bg-[#0A0A0A]/40 transition-all duration-500 z-10" />
 
                   {/* Rating Badge */}
                   {movie.rating && (

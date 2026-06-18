@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, Disc, Globe, ChevronDown } from 'lucide-react';
+import { FaInstagram, FaYoutube } from 'react-icons/fa';
 import { useLanguage } from '../context/LanguageContext';
 import { LANGUAGES, LanguageCode } from '../translations';
+import logoImg from '../../assets/images/logo/logo-jack.png';
 
 interface NavbarProps {
   activeSection: string;
   setActiveSection: (section: string) => void;
+  setCurrentPage: (page: 'home' | 'privacy' | 'terms') => void;
 }
 
-export default function Navbar({ activeSection, setActiveSection }: NavbarProps) {
+export default function Navbar({ activeSection, setActiveSection, setCurrentPage }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
@@ -40,25 +43,27 @@ export default function Navbar({ activeSection, setActiveSection }: NavbarProps)
     (window as any).__isProgrammaticScroll = Date.now();
     setIsOpen(false);
     setActiveSection(id);
-    
-    const element = document.getElementById(id);
-    if (element) {
-      const offsetTop = element.offsetTop - 80; // offset of the navigation bar height
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth',
-      });
-    }
+    setCurrentPage('home');
+
+    setTimeout(() => {
+      const element = document.getElementById(id);
+      if (element) {
+        const offsetTop = element.offsetTop - 80; // offset of the navigation bar height
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth',
+        });
+      }
+    }, 100);
   };
 
   return (
     <nav
       id="main-navbar"
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
-          ? 'bg-[#0A0A0A]/90 backdrop-blur-md border-b border-yellow-500/10 py-3 shadow-2xl'
-          : 'bg-transparent py-5'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
+        ? 'bg-[#0A0A0A]/90 backdrop-blur-md border-b border-yellow-500/10 py-3 shadow-2xl'
+        : 'bg-transparent py-5'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
@@ -71,15 +76,7 @@ export default function Navbar({ activeSection, setActiveSection }: NavbarProps)
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="p-1 px-2 border border-yellow-500/20 bg-yellow-500/5 rounded flex items-center justify-center">
-            <span className="text-[10px] font-mono tracking-widest text-yellow-500/80 font-bold">AJ</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[9px] font-mono tracking-widest text-[#D4AF37]">{t('hero.artist')}</span>
-            <span className="text-lg font-serif font-bold tracking-tight text-white group-hover:text-[#D4AF37] transition-all">
-              JACK<span className="text-[#D4AF37]">.</span>
-            </span>
-          </div>
+          <img src={logoImg} alt="Actor Jack Prabhu Logo" className="h-17 w-auto object-contain scale-[1.3] origin-left drop-shadow-[0_0_8px_rgba(212,175,55,0.2)] group-hover:drop-shadow-[0_0_12px_rgba(212,175,55,0.4)] transition-all duration-300" />
         </motion.a>
 
         {/* Desktop Menu */}
@@ -90,9 +87,8 @@ export default function Navbar({ activeSection, setActiveSection }: NavbarProps)
               id={`nav-item-desktop-${item.id}`}
               href={`#${item.id}`}
               onClick={(e) => handleNavClick(e, item.id)}
-              className={`relative px-4 py-2 rounded-full text-xs font-mono tracking-wider transition-colors duration-300 ${
-                activeSection === item.id ? 'text-black' : 'text-gray-400 hover:text-white'
-              }`}
+              className={`relative px-4 py-2 rounded-full text-xs font-mono tracking-wider transition-colors duration-300 ${activeSection === item.id ? 'text-black' : 'text-gray-400 hover:text-white'
+                }`}
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
@@ -113,7 +109,7 @@ export default function Navbar({ activeSection, setActiveSection }: NavbarProps)
 
         {/* Desktop Controls (Language Selector & Quick Inquire CTA) */}
         <div className="hidden lg:flex items-center gap-4">
-          
+
           {/* Desktop Language Selector */}
           <div className="relative" id="language-selector-desktop">
             <button
@@ -126,7 +122,7 @@ export default function Navbar({ activeSection, setActiveSection }: NavbarProps)
               <span>{LANGUAGES.find(l => l.code === language)?.label}</span>
               <ChevronDown size={11} className={`text-gray-500 transition-transform ${isLangOpen ? 'rotate-180' : ''}`} />
             </button>
-            
+
             <AnimatePresence>
               {isLangOpen && (
                 <motion.div
@@ -145,11 +141,10 @@ export default function Navbar({ activeSection, setActiveSection }: NavbarProps)
                         setLanguage(lang.code);
                         setIsLangOpen(false);
                       }}
-                      className={`w-full text-left px-4 py-2 text-xs font-mono transition-colors ${
-                        language === lang.code
-                          ? 'text-black bg-[#D4AF37] font-semibold'
-                          : 'text-gray-400 hover:text-white hover:bg-white/5'
-                      }`}
+                      className={`w-full text-left px-4 py-2 text-xs font-mono transition-colors ${language === lang.code
+                        ? 'text-black bg-[#D4AF37] font-semibold'
+                        : 'text-gray-400 hover:text-white hover:bg-white/5'
+                        }`}
                     >
                       {lang.label}
                     </button>
@@ -159,17 +154,6 @@ export default function Navbar({ activeSection, setActiveSection }: NavbarProps)
             </AnimatePresence>
           </div>
 
-          <motion.a
-            id="nav-quick-cta"
-            href="#contact"
-            onClick={(e) => handleNavClick(e, 'contact')}
-            className="px-4 py-1.5 border border-yellow-500/30 rounded-md bg-[#D4AF37]/5 text-xs text-[#D4AF37] font-semibold tracking-wider hover:bg-[#D4AF37] hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(212,175,55,0.1)] hover:shadow-[0_0_20px_rgba(212,175,55,0.3)]"
-            initial={{ opacity: 0, x: 25 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            {t('nav.contact')}
-          </motion.a>
         </div>
 
         {/* Mobile Menu button */}
@@ -203,11 +187,10 @@ export default function Navbar({ activeSection, setActiveSection }: NavbarProps)
                   id={`nav-item-mobile-${item.id}`}
                   href={`#${item.id}`}
                   onClick={(e) => handleNavClick(e, item.id)}
-                  className={`text-xl font-serif tracking-wide py-1 border-b border-white/5 transition-all block ${
-                    activeSection === item.id
-                      ? 'text-[#D4AF37] font-semibold scale-105'
-                      : 'text-gray-400 hover:text-white'
-                  }`}
+                  className={`text-xl font-serif tracking-wide py-1 border-b border-white/5 transition-all block ${activeSection === item.id
+                    ? 'text-[#D4AF37] font-semibold scale-105'
+                    : 'text-gray-400 hover:text-white'
+                    }`}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.03, duration: 0.25 }}
@@ -233,11 +216,10 @@ export default function Navbar({ activeSection, setActiveSection }: NavbarProps)
                         setLanguage(lang.code);
                         setIsOpen(false);
                       }}
-                      className={`py-1.5 text-[11px] font-mono rounded-lg border transition-all ${
-                        isSelected
-                          ? 'border-[#D4AF37] bg-yellow-500/10 text-[#D4AF37] font-bold'
-                          : 'border-white/5 bg-white/5 text-gray-400'
-                      }`}
+                      className={`py-1.5 text-[11px] font-mono rounded-lg border transition-all ${isSelected
+                        ? 'border-[#D4AF37] bg-yellow-500/10 text-[#D4AF37] font-bold'
+                        : 'border-white/5 bg-white/5 text-gray-400'
+                        }`}
                     >
                       {lang.label}
                     </button>
@@ -256,18 +238,18 @@ export default function Navbar({ activeSection, setActiveSection }: NavbarProps)
                   href="https://www.instagram.com/actor_jack_official"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-[#D4AF37] border-b border-[#D4AF37]/20"
+                  className="text-xs text-[#D4AF37] border-b border-[#D4AF37]/20 flex items-center gap-1.5"
                 >
-                  Instagram
+                  <FaInstagram size={12} /> Instagram
                 </a>
                 <a
                   id="mobile-drawer-yt"
                   href="https://youtube.com/@actorjack.07"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-gray-400"
+                  className="text-xs text-gray-400 flex items-center gap-1.5 hover:text-[#D4AF37] transition-colors"
                 >
-                  YouTube
+                  <FaYoutube size={12} /> YouTube
                 </a>
               </div>
             </div>

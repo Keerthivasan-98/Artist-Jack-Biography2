@@ -16,12 +16,39 @@ export default function WebSeries() {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center md:text-left mb-16">
-          <p className="text-xs font-mono font-medium tracking-[0.3em] text-[#D4AF37] uppercase mb-3">{t('webseries.digital')}</p>
-          <h2 className="text-3xl md:text-5xl font-bold font-serif text-white tracking-tight leading-none">
-            {t('webseries.title')}<span className="text-[#D4AF37]">.</span>
-          </h2>
-          <div className="w-16 h-[2px] bg-[#D4AF37] mt-6 mx-auto md:mx-0" />
+        <div className="text-left mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-yellow-500/20 bg-yellow-500/5 mb-4"
+          >
+            <Tv size={14} className="text-[#D4AF37]" />
+            <span className="text-[10px] font-mono tracking-widest text-[#D4AF37] uppercase font-semibold">
+              {t('webseries.digital')}
+            </span>
+          </motion.div>
+          
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold tracking-tight text-white mb-6 text-left"
+          >
+            {t('webseries.title')}
+          </motion.h2>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-sm sm:text-base text-gray-400 font-sans leading-relaxed text-left max-w-3xl"
+          >
+            {t('webseries.desc')}
+          </motion.p>
         </div>
 
         {/* Dynamic Bento-Grid Web Series Cards */}
@@ -32,7 +59,7 @@ export default function WebSeries() {
               <motion.div
                 key={series.id}
                 id={`series-bento-${series.id}`}
-                className="group flex flex-col md:flex-row bg-[#121212]/30 border border-white/5 hover:border-yellow-500/20 rounded-2xl overflow-hidden backdrop-blur-sm shadow-xl transition-all duration-500"
+                className="group relative flex flex-col md:flex-row bg-[#121212]/30 border border-white/5 hover:border-yellow-500/20 rounded-2xl overflow-hidden backdrop-blur-sm shadow-xl transition-all duration-500"
                 initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
@@ -94,6 +121,9 @@ export default function WebSeries() {
                       {series.roleHighlight}
                     </p>
                   </div>
+
+                  {/* Accent border at card bottom */}
+                  <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-yellow-600 to-[#D4AF37] group-hover:w-full transition-all duration-500 z-50" />
 
                 </div>
               </motion.div>

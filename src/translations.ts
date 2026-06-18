@@ -84,7 +84,9 @@ export interface TranslationDict {
 
   // Gallery
   'gallery.behind': string;
+  'gallery.captures': string;
   'gallery.title': string;
+  'gallery.desc': string;
   'gallery.all': string;
   'gallery.movies': string;
   'gallery.events': string;
@@ -175,12 +177,12 @@ export const translations: Record<LanguageCode, TranslationDict> = {
     'nav.media': 'Media',
     'nav.contact': 'Contact',
 
-    'hero.tag': 'Tamil Cinema • Television • Music',
-    'hero.artist': 'ARTIST',
+    'hero.tag': 'Tamil Cinema • Television • Short Films',
+    'hero.artist': 'ACTOR',
     'hero.actor': 'Actor',
-    'hero.singer': 'Singer',
-    'hero.lyricwriter': 'Lyricwriter',
-    'hero.desc': 'Versatile Tamil actor with deep roots in films, highly acclaimed television serials, OTT web series, and short films. Passionate about bringing authentic narratives alive through powerful performance and original independent lyricwriting.',
+    'hero.singer': '',
+    'hero.lyricwriter': '',
+    'hero.desc': 'Versatile Tamil actor with deep roots in films, highly acclaimed television serials, OTT web series, and short films. Passionate about bringing authentic narratives alive through powerful performance.',
     'hero.cta.explore': 'Explore Journey',
     'hero.cta.reel': 'Watch Showreel',
     'hero.resident': 'Resident Location',
@@ -189,11 +191,11 @@ export const translations: Record<LanguageCode, TranslationDict> = {
     'hero.bookings': 'Open for Bookings',
 
     'about.journey': 'THE JOURNEY',
-    'about.title': 'About Artist Jack.',
+    'about.title': 'About Actor Jack Prabhu.',
     'about.about': 'About',
-    'about.intro': 'Bringing authentic characters and soul-driven music into Tamil Cinema.',
-    'about.p1': 'Hailing from the vibrant cultural ecosystem of Chennai, Tamil Nadu, Artist Jack has grown to become an exceptionally versatile performer across diverse mediums. From independent short film sets to mainstream theatrical blockbusters, serial TV dramas, and highly acclaimed premium OTT web series, Jack’s passion for storytelling is absolute.',
-    'about.p2': 'Beyond specialized physical acting, his dual devotion towards original music composition forms a distinct artistic dimension. Recording acoustic indie tracks, designing original compositions, and writing direct, soulful lyrics underpins his creative identity.',
+    'about.intro': 'Bringing authentic characters into Tamil Cinema.',
+    'about.p1': 'Hailing from the vibrant cultural ecosystem of Chennai, Tamil Nadu, Actor Jack Prabhu has grown to become an exceptionally versatile performer across diverse mediums. From independent short film sets to mainstream theatrical blockbusters, serial TV dramas, and highly acclaimed premium OTT web series, his passion for storytelling is absolute.',
+    'about.p2': 'Dedicated entirely to the craft of physical acting, he continues to build a distinct cinematic identity. Mastering complex emotions, stunt work, and immersive dialogue delivery underpins his creative identity.',
     'about.active': 'Active Since',
     'about.primary_base': 'Primary Base',
     'about.languages': 'Languages',
@@ -201,11 +203,11 @@ export const translations: Record<LanguageCode, TranslationDict> = {
     'about.philosophy': 'Core Philosophy',
     'about.philosophy_title': 'Values That Define My Craft',
     'about.philosophy.p1.title': 'Artistic Versatility',
-    'about.philosophy.p1.desc': 'Fluidly transitioning between complex dramatic leads, authentic physical action stunting, comedic timings, and high-pitch vocal recordings.',
+    'about.philosophy.p1.desc': 'Fluidly transitioning between complex dramatic leads, authentic physical action stunting, and comedic timings.',
     'about.philosophy.p2.title': 'Cinematic Dedication',
     'about.philosophy.p2.desc': 'Trained in classical acting theories and Chennai theatrical stages, bringing meticulous script analysis and posture prep to every single frame.',
-    'about.philosophy.p3.title': 'Acoustic Musical Soul',
-    'about.philosophy.p3.desc': 'Independent singer and lyricwriter blending regional Tamil acoustic instruments with modern digital indie-folk guitars.',
+    'about.philosophy.p3.title': 'Driven Performance',
+    'about.philosophy.p3.desc': 'A dedicated professional focused entirely on delivering impactful, memorable screen performances.',
     'about.timeline': 'Chronicle Of Milestones',
     'about.timeline.title': 'Career Timeline',
 
@@ -217,12 +219,12 @@ export const translations: Record<LanguageCode, TranslationDict> = {
     'films.role': 'Role',
     'films.genre': 'Genre',
 
-    'videos.reels': 'REELS & MUSIC',
+    'videos.reels': 'SHOWREELS',
     'videos.title': 'Featured Media.',
-    'videos.desc': 'A collection of selected showreels, acoustic guitar performance, and interviews showcasing Jack’s versatility in acting and singing.',
+    'videos.desc': 'A collection of selected showreels and interviews showcasing Actor Jack Prabhu’s versatility in acting.',
     'videos.all': 'All Reels',
     'videos.showreel': 'Showreels',
-    'videos.song': 'Songs',
+    'videos.song': '',
     'videos.interview': 'Interviews',
 
     'webseries.digital': 'DIGITAL SPHERE',
@@ -241,7 +243,9 @@ export const translations: Record<LanguageCode, TranslationDict> = {
     'tv.role': 'Cast Role',
 
     'gallery.behind': 'BEHIND THE SCREEN',
+    'gallery.captures': 'CAPTURES & STILLS',
     'gallery.title': 'Moments in Shot.',
+    'gallery.desc': 'A curated collection of on-set moments, candid behind-the-scenes photography, and official promotional shoots capturing Actor Jack Prabhu’s cinematic journey.',
     'gallery.all': 'All Photos',
     'gallery.movies': 'Movies',
     'gallery.events': 'Events',
@@ -251,12 +255,12 @@ export const translations: Record<LanguageCode, TranslationDict> = {
 
     'media.press': 'PRESS & CRITICS',
     'media.title': 'In the Headlines.',
-    'media.desc': 'Explore what entertainment critics, cinema journalists, and digital content platforms are stating about Jack’s latest screen performance and musical singles.',
+    'media.desc': 'Explore what entertainment critics, cinema journalists, and digital content platforms are stating about Jack’s latest screen performances across film and television.',
     'media.read_more': 'Read Full Feature',
 
     'contact.get_in_touch': 'GET IN TOUCH',
     'contact.title': 'Request Collab or casting booking.',
-    'contact.desc': 'For film casting, musical project commissions, brand endorsements, live song covers, or general creative inquiries; feel free to drop a direct note here.',
+    'contact.desc': 'For film casting, digital web series commissions, brand endorsements, or general creative inquiries; feel free to drop a direct note here.',
     'contact.form_title': 'Send Direct Inquiry',
     'contact.form_desc': 'Your submission goes directly to Jack\'s professional team.',
     'contact.fullname': 'Full Name',
@@ -272,10 +276,10 @@ export const translations: Record<LanguageCode, TranslationDict> = {
     'contact.mail': 'Professional Mailbox',
     'contact.insta': 'Instagram Feed',
 
-    'footer.brand': 'ACTOR JACK',
-    'footer.desc': 'Honest storytelling, physical cinema, and soulful melodic vocals from Chennai to the world.',
+    'footer.brand': 'ACTOR JACK PRABHU',
+    'footer.desc': 'Honest storytelling and physical cinema from Chennai to the world.',
     'footer.designed': 'Designed & developed for the silver screen.',
-    'footer.rights': '© 2026 Jack. All rights reserved.',
+    'footer.rights': '© 2026 Jack Prabhu. All rights reserved.',
     'footer.navigations': 'Navigations',
     'footer.sections': 'Sections',
     'footer.channels': 'Official Channels',
@@ -284,21 +288,21 @@ export const translations: Record<LanguageCode, TranslationDict> = {
 
     'awards.awards': 'RECOGNITIONS & LAURELS',
     'awards.title': 'Awards & Honors',
-    'awards.desc': 'Celebrating Artist Jack’s excellence and critical acclaim across Indian films, prime-time television, OTT web series, and independent music achievements.',
+    'awards.desc': 'Celebrating Actor Jack Prabhu’s excellence and critical acclaim across Indian films, prime-time television, and OTT web series.',
     'awards.filter.all': 'All',
     'awards.filter.television': 'Television Awards',
     'awards.filter.film': 'Film Awards',
     'awards.filter.digital': 'Digital Awards',
-    'awards.filter.music': 'Music Awards',
+    'awards.filter.music': 'Short Film Awards',
     'awards.filter.special': 'Special Honors',
 
     'data.movies': [
       {
         id: 'm1',
         title: 'Kaatrin Mozhi',
-        role: 'Supporting Actor / Singer',
+        role: 'Supporting Actor',
         genre: 'Drama',
-        description: 'A charming comedy-drama starring Jyothika, exploring the life of an ambitious radio jockey. Jack delivered a strong supporting performance and contributed to the vocal backing track.'
+        description: 'A charming comedy-drama starring Jyothika, exploring the life of an ambitious radio jockey. Jack delivered a strong supporting performance that resonated with audiences.'
       },
       {
         id: 'm2',
@@ -412,24 +416,24 @@ export const translations: Record<LanguageCode, TranslationDict> = {
     ],
     'data.videos': [
       { id: 'v1', title: 'Artist Jack Official Showreel 2026', category: 'Showreel' },
-      { id: 'v2', title: '“Neeye” - Indie Tamil Acoustic Session by Jack', category: 'Song' },
+      { id: 'v2', title: '“The Confrontation” - Dramatic Short Film Excerpt by Jack', category: 'Showreel' },
       { id: 'v3', title: 'Behind the Voice: Exclusive Studio Interview with Jack', category: 'Interview' }
     ],
     'data.gallery': [
       { id: 'g1', title: 'Kaatrin Mozhi Filming', alt: 'Kaatrin Mozhi on-set action with directors', category: 'Movies' },
-      { id: 'g2', title: 'Audio Launch Performance', alt: 'Jack performing on stage at audio launch', category: 'Events' },
+      { id: 'g2', title: 'Award Function Appearance', alt: 'Jack attending an award function in Chennai', category: 'Events' },
       { id: 'g3', title: 'Modern Classic Portait', alt: 'Studio portrait of Actor Jack', category: 'Promotional Shoots' },
       { id: 'g4', title: 'Auto Shankar script read', alt: 'Jack reviewing script on set of Auto Shankar', category: 'Behind the Scenes' },
       { id: 'g5', title: 'TV Reality Star Guest Panel', alt: 'Jack as guest mentor on reality TV show', category: 'Television' },
       { id: 'g6', title: 'Action Sequence Stunt Set', alt: 'Dramatic police confrontation scene in Kuttram Purinthal', category: 'Movies' },
       { id: 'g7', title: 'Luxury Suit Shoot', alt: 'Sleek premium suit photoshoot for brand endorsement', category: 'Promotional Shoots' },
-      { id: 'g8', title: 'Unplugged Dubbing Session', alt: 'Jack recording vocals in soundproof studio', category: 'Behind the Scenes' }
+      { id: 'g8', title: 'Post-Production Dubbing', alt: 'Jack dubbing dialogues in a soundproof studio', category: 'Behind the Scenes' }
     ],
     'data.media': [
       {
         id: 'media1',
-        title: '“From Indie Songs to Silverscreen” – Behind Jack’s Musical Journey',
-        description: 'An expansive profile piece tracking Jack’s rise from performing acoustic covers in Chennai cafés to sharing screen space with legendary actors in Tamil cinema.',
+        title: '“From Theatre Stages to Silverscreen” – Behind Jack’s Cinematic Journey',
+        description: 'An expansive profile piece tracking Jack’s rise from performing on Chennai theatre stages to sharing screen space with legendary actors in Tamil cinema.',
         type: 'Interview',
         source: 'The Hindu Cinema'
       },
@@ -475,10 +479,10 @@ export const translations: Record<LanguageCode, TranslationDict> = {
       },
       {
         id: 'a4',
-        title: 'Chennai Indie Music Awards',
-        category: 'Best Independent Lyricist & Singer',
+        title: 'Chennai Short Film Fest',
+        category: 'Best Actor in a Short Film',
         year: '2022',
-        description: 'Recognized for outstanding vocal performance and meaningful lyrics in independent Tamil acoustic folk compositions.',
+        description: 'Recognized for outstanding intense performance in independent Tamil short films.',
         filterType: 'Music'
       },
       {
@@ -491,7 +495,7 @@ export const translations: Record<LanguageCode, TranslationDict> = {
       }
     ],
     'data.stats': [
-      { label: 'Feature Films', value: '7+' },
+      { label: 'Feature Films', value: '20+' },
       { label: 'Short Films', value: '10+' },
       { label: 'Web Series', value: '2' },
       { label: 'TV Appearances', value: 'Multiple' }
@@ -500,7 +504,7 @@ export const translations: Record<LanguageCode, TranslationDict> = {
       {
         year: '2016 - 2017',
         title: 'Indie Roots & Chennai Theatre',
-        description: 'Performed with iconic theatre groups in Chennai. Developed singing and songwriting styles in live musical circuits, while securing prominent supporting roles in award-winning short films.'
+        description: 'Performed with iconic theatre groups in Chennai. Developed acting and stage presence in live theatrical circuits, while securing prominent supporting roles in award-winning short films.'
       },
       {
         year: '2018',
@@ -602,7 +606,9 @@ export const translations: Record<LanguageCode, TranslationDict> = {
     'tv.role': 'கதாபாத்திரம்',
 
     'gallery.behind': 'திரைக்குப் பின்னால்',
+    'gallery.captures': 'CAPTURES & STILLS',
     'gallery.title': 'சுவாரஸ்யமான தருணங்கள்.',
+    'gallery.desc': 'A curated collection of on-set moments, candid behind-the-scenes photography, and official promotional shoots capturing Actor Jack Prabhu’s cinematic journey.',
     'gallery.all': 'அனைத்துப் படங்கள்',
     'gallery.movies': 'திரைப்படங்கள்',
     'gallery.events': 'நிகழ்ச்சிகள்',
@@ -852,7 +858,7 @@ export const translations: Record<LanguageCode, TranslationDict> = {
       }
     ],
     'data.stats': [
-      { label: 'திரைப்படங்கள்', value: '7+' },
+      { label: 'திரைப்படங்கள்', value: '20+' },
       { label: 'குறும்படங்கள்', value: '10+' },
       { label: 'வலைத்தொடர்கள்', value: '2' },
       { label: 'தொலைக்காட்சித் தொடர்கள்', value: 'பல' }
@@ -963,7 +969,9 @@ export const translations: Record<LanguageCode, TranslationDict> = {
     'tv.role': 'കഥാപാത്രം',
 
     'gallery.behind': 'ബിഹൈൻഡ് ദി സീൻ',
+    'gallery.captures': 'CAPTURES & STILLS',
     'gallery.title': 'പ്രധാന നിമിഷങ്ങൾ.',
+    'gallery.desc': 'A curated collection of on-set moments, candid behind-the-scenes photography, and official promotional shoots capturing Actor Jack Prabhu’s cinematic journey.',
     'gallery.all': 'എല്ലാ ചിത്രങ്ങളും',
     'gallery.movies': 'സിനിമകൾ',
     'gallery.events': 'പരിപാടികൾ',
@@ -1213,7 +1221,7 @@ export const translations: Record<LanguageCode, TranslationDict> = {
       }
     ],
     'data.stats': [
-      { label: 'സിനിമകൾ', value: '7+' },
+      { label: 'സിനിമകൾ', value: '20+' },
       { label: 'ഹ്രസ്വചിത്രങ്ങൾ', value: '10+' },
       { label: 'വെബ് സീരീസ്', value: '2' },
       { label: 'ടിവി സാന്നിധ്യം', value: 'പലതവണ' }
@@ -1324,7 +1332,9 @@ export const translations: Record<LanguageCode, TranslationDict> = {
     'tv.role': 'పాత్ర',
 
     'gallery.behind': 'బిహైండ్ ది సీన్స్',
+    'gallery.captures': 'CAPTURES & STILLS',
     'gallery.title': 'మధుర క్షణాలు.',
+    'gallery.desc': 'A curated collection of on-set moments, candid behind-the-scenes photography, and official promotional shoots capturing Actor Jack Prabhu’s cinematic journey.',
     'gallery.all': 'అన్ని చిత్రాలు',
     'gallery.movies': 'సినిమాలు',
     'gallery.events': 'కార్యక్రమాలు',
@@ -1574,7 +1584,7 @@ export const translations: Record<LanguageCode, TranslationDict> = {
       }
     ],
     'data.stats': [
-      { label: 'సినిమాలు', value: '7+' },
+      { label: 'సినిమాలు', value: '20+' },
       { label: 'లఘు చిత్రాలు', value: '10+' },
       { label: 'వెబ్ సిరీస్', value: '2' },
       { label: 'టీవీ ప్రదర్శనలు', value: 'అనేకం' }
@@ -1685,7 +1695,9 @@ export const translations: Record<LanguageCode, TranslationDict> = {
     'tv.role': 'ಪಾತ್ರ',
 
     'gallery.behind': 'ಬಿಹೈಂಡ್ ದಿ ಕ್ಯಾಮೆರಾ',
+    'gallery.captures': 'CAPTURES & STILLS',
     'gallery.title': 'ಸುಂದರ ಕ್ಷಣಗಳು.',
+    'gallery.desc': 'A curated collection of on-set moments, candid behind-the-scenes photography, and official promotional shoots capturing Actor Jack Prabhu’s cinematic journey.',
     'gallery.all': 'ಎಲ್ಲಾ ಚಿತ್ರಗಳು',
     'gallery.movies': 'ಚಲನಚಿತ್ರಗಳು',
     'gallery.events': 'ಕಾರ್ಯಕ್ರಮಗಳು',
@@ -1935,7 +1947,7 @@ export const translations: Record<LanguageCode, TranslationDict> = {
       }
     ],
     'data.stats': [
-      { label: 'ಚಲನಚಿತ್ರಗಳು', value: '7+' },
+      { label: 'ಚಲನಚಿತ್ರಗಳು', value: '20+' },
       { label: 'ಕಿರುಚಿತ್ರಗಳು', value: '10+' },
       { label: 'ವೆಬ್ ಸರಣಿಗಳು', value: '2' },
       { label: 'ಟಿವಿ ಪ್ರದರ್ಶನಗಳು', value: 'ಹಲವಾರು' }
@@ -2046,7 +2058,9 @@ export const translations: Record<LanguageCode, TranslationDict> = {
     'tv.role': 'किरदार',
 
     'gallery.behind': 'पर्दे के पीछे',
+    'gallery.captures': 'CAPTURES & STILLS',
     'gallery.title': 'यादगार लम्हें।',
+    'gallery.desc': 'A curated collection of on-set moments, candid behind-the-scenes photography, and official promotional shoots capturing Actor Jack Prabhu’s cinematic journey.',
     'gallery.all': 'सभी तस्वीरें',
     'gallery.movies': 'फिल्में',
     'gallery.events': 'समारोह',
@@ -2296,7 +2310,7 @@ export const translations: Record<LanguageCode, TranslationDict> = {
       }
     ],
     'data.stats': [
-      { label: 'मुख्य फिल्में', value: '7+' },
+      { label: 'मुख्य फिल्में', value: '20+' },
       { label: 'लघु फिल्में', value: '10+' },
       { label: 'वेब सीरीज़', value: '2' },
       { label: 'टीवी प्रसारण', value: 'कई बार' }
