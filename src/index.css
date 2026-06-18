@@ -7,3 +7,38 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
+/* Custom Themed Global Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+  border-left: 1px solid rgba(212, 175, 55, 0.05); /* very subtle gold */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #D4AF37; /* Bright solid gold */
+  border-radius: 10px;
+  border: 3px solid #0A0A0A; /* creates padding effect */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #FDE047; /* Brighter yellow on hover */
+}
+
+/* Firefox support */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #D4AF37 #0A0A0A;
+}
+
+/* Utility to hide specific scrollbars when needed */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

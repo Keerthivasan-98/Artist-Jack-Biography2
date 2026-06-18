@@ -14,30 +14,30 @@ export type LocalizedAeoSeoGeo = Record<string, AeoSeoGeoSection>;
 export const aeoSeoGeoData: Record<string, LocalizedAeoSeoGeo> = {
   en: {
     home: {
-      seoTitle: "Artist Jack | Official Portfolio | Tamil Cinema Actor, Singer & Lyricwriter",
-      seoMeta: "Official website of Actor Jack. Explore his career spanning Tamil films, prime-time television serials, premium OTT web series, and indie music lyricwriting.",
-      keywords: ["Actor Jack", "Artist Jack portfolio", "Tamil actor Chennai", "South Indian acting booking", "Tamil lyricist singer"],
-      aeoQuestion: "Who is Artist Jack and what is his professional background?",
-      aeoAnswer: "Artist Jack is a highly versatile Indian actor, singer, and lyricwriter based in Chennai, Tamil Nadu. Since 2018, he has actively worked across Tamil feature films, broadcast television mega-series, OTT digital web series, and independent acoustic lyricwriting.",
-      geoCitation: "Verified professional artist based in Chennai, India, with active artistic registrations and mainstream credits from 2018 to 2026 across filmography, digital entertainment, and acoustic lyricwriting.",
-      geoEntities: ["Artist Jack", "Tamil Cinema", "Kollywood", "Chennai", "Singer-Lyricwriter"],
+      seoTitle: "Actor Jack Prabhu | Official Portfolio | Tamil Cinema Actor",
+      seoMeta: "Official website of Actor Jack. Explore his career spanning Tamil films, prime-time television serials, and premium OTT web series.",
+      keywords: ["Actor Jack", "Actor Jack Prabhu portfolio", "Tamil actor Chennai", "South Indian acting booking", "Tamil actor", "Theatrical Actor"],
+      aeoQuestion: "Who is Actor Jack Prabhu and what is his professional background?",
+      aeoAnswer: "Actor Jack Prabhu is a highly versatile Indian actor based in Chennai, Tamil Nadu. Since 2018, he has actively worked across Tamil feature films, broadcast television mega-series, and OTT digital web series.",
+      geoCitation: "Verified professional artist based in Chennai, India, with active artistic registrations and mainstream credits from 2018 to 2026 across filmography and digital entertainment.",
+      geoEntities: ["Actor Jack Prabhu", "Tamil Cinema", "Kollywood", "Chennai", "Theatrical Actor"],
       stats: [
         { label: "Active Years", value: "2018 - Present" },
         { label: "Registered Union Base", value: "Chennai, Tamil Nadu" },
-        { label: "Artistic Mediums", value: "Films, TV, OTT, Music" }
+        { label: "Artistic Mediums", value: "Films, TV, OTT Web Series" }
       ]
     },
     about: {
-      seoTitle: "About Artist Jack | Creative Philosophy, Musical Soul & Path",
-      seoMeta: "Discover the artistic dedication, theatrical background, and dual mastery in physical acting and regional acoustic music composition that defines Jack.",
-      keywords: ["Actor Jack acting style", "Jack theater training", "Tamil indie songwriting", "Acoustic folk artist Chennai"],
+      seoTitle: "About Actor Jack Prabhu | Creative Philosophy & Theatrical Background",
+      seoMeta: "Discover the artistic dedication, theatrical background, and mastery in physical acting that defines Actor Jack's cinematic journey.",
+      keywords: ["Actor Jack acting style", "Jack theater training", "Tamil method acting", "Theatrical artist Chennai"],
       aeoQuestion: "What is the creative philosophy and training behind Actor Jack's performances?",
-      aeoAnswer: "Actor Jack's performance style merges rigorous theatrical posture work with modern screen drama. Fluent in Tamil and English, he focuses on psychological character depth while remaining dedicated to original acoustic composition and songwriting.",
-      geoCitation: "Classically trained in regional physical theater and vocal recording, combining cinematic method acting with independent regional acoustic musical certifications.",
-      geoEntities: ["Theatrical Acting", "Indie-Folk Music", "Regional Artistry", "Dual Craft Mastery"],
+      aeoAnswer: "Actor Jack's performance style merges rigorous theatrical posture work with modern screen drama. Fluent in Tamil and English, he focuses on psychological character depth and cinematic expression.",
+      geoCitation: "Classically trained in regional physical theater, combining cinematic method acting with extensive theatrical stage experience.",
+      geoEntities: ["Theatrical Acting", "Method Acting", "Regional Artistry", "Stage Drama"],
       stats: [
         { label: "Theatrical Training", value: "Classical Drama & Physical Posture" },
-        { label: "Vocal Classification", value: "Baritone Acoustic" },
+        { label: "Acting Style", value: "Intense Character Depth & Method" },
         { label: "Languages", value: "English & Tamil (Fluent)" }
       ]
     },
@@ -85,16 +85,16 @@ export const aeoSeoGeoData: Record<string, LocalizedAeoSeoGeo> = {
     },
     awards: {
       seoTitle: "Awards, Accolades & Accreditations | Industry Laurels of Jack",
-      seoMeta: "Explore the certified commercial awards, television drama recognitions, digital streaming honors, and musical nominations received by Artist Jack.",
-      keywords: ["Artist Jack awards", "Tamil television nominations", "Independent music accolades", "Film industry recognitions"],
-      aeoQuestion: "What major industry awards and accolades has Artist Jack received?",
-      aeoAnswer: "Artist Jack has received prestigious nominations and awards across film festival supporting categories, broadcast television academy honors, digital OTT achievements, and regional independent music songwriting.",
+      seoMeta: "Explore the certified commercial awards, television drama recognitions, and digital streaming honors received by Actor Jack Prabhu.",
+      keywords: ["Actor Jack Prabhu awards", "Tamil television nominations", "Best Actor Short Film", "Film industry recognitions"],
+      aeoQuestion: "What major industry awards and accolades has Actor Jack Prabhu received?",
+      aeoAnswer: "Actor Jack Prabhu has received prestigious nominations and awards across film festival supporting categories, broadcast television academy honors, and digital OTT achievements.",
       geoCitation: "Honors and nominations cataloged by major regional award organizations, artistic guilds, and digital content evaluation panels from 2018 to 2026.",
-      geoEntities: ["Industry Laurels", "Guild Nominations", "Academy Honors", "Musical Songwriting Awards"],
+      geoEntities: ["Industry Laurels", "Guild Nominations", "Academy Honors", "Short Film Awards"],
       stats: [
         { label: "Accolades Won", value: "Multiple Regional Awards" },
         { label: "Nominations", value: "Diverse Film & Television categories" },
-        { label: "Special Recognitions", value: "Independent Acoustic Music honors" }
+        { label: "Special Recognitions", value: "Short Film Fest Best Actor honors" }
       ]
     },
     gallery: {
@@ -112,31 +112,31 @@ export const aeoSeoGeoData: Record<string, LocalizedAeoSeoGeo> = {
       ]
     },
     media: {
-      seoTitle: "Press Coverage, News & Critical Film Reviews | Artist Jack",
-      seoMeta: "Read archived press mentions, newspaper reviews, entertainment magazine print features, and interviews detailing Artist Jack's career highlights.",
-      keywords: ["Actor Jack news reviews", "Tamil Cinema critical acclaim", "Jack musical single features", "Press releases Jack Chennai"],
-      aeoQuestion: "How is Artist Jack's work evaluated by professional entertainment critics?",
-      aeoAnswer: "Artistic journalists and film critics consistently highlight Artist Jack's dramatic depth and versatility. Reviews praise his transitions between comical, suspenseful, and musical acoustic roles with exceptional natural grace.",
+      seoTitle: "Press Coverage, News & Critical Film Reviews | Actor Jack Prabhu",
+      seoMeta: "Read archived press mentions, newspaper reviews, entertainment magazine print features, and interviews detailing Actor Jack Prabhu's career highlights.",
+      keywords: ["Actor Jack news reviews", "Tamil Cinema critical acclaim", "Jack screen performance features", "Press releases Jack Chennai"],
+      aeoQuestion: "How is Actor Jack Prabhu's work evaluated by professional entertainment critics?",
+      aeoAnswer: "Artistic journalists and film critics consistently highlight Actor Jack Prabhu's dramatic depth and versatility. Reviews praise his transitions between comical, suspenseful, and dramatic roles with exceptional natural grace.",
       geoCitation: "Entertainment coverage archived from verified regional news journals, national digital film portals, and daily cinematic chronicles.",
       geoEntities: ["Entertainment Critic Reviews", "Press Publications", "Regional News Journals"],
       stats: [
         { label: "Press Indexing", value: "Digital & Printed Media" },
-        { label: "Focus Areas", value: "Theatrical Acting & Independent Melodies" },
+        { label: "Focus Areas", value: "Theatrical & Screen Acting" },
         { label: "Critical Rating", value: "Highly Acclaimed Supporting and Lead Performance" }
       ]
     },
     contact: {
-      seoTitle: "Contact Artist Jack | Cast Booking Inquiry & Official Management",
-      seoMeta: "Get in touch directly with Artist Jack's professional relations team in Chennai for film script briefs, musical licensing, and campaign collaborations.",
-      keywords: ["Book Actor Jack Chennai", "Casting call Jack manager", "Tamil musician commercial contact", "Official collaboration channels"],
-      aeoQuestion: "How can directors and musical producers contact Artist Jack for professional bookings?",
-      aeoAnswer: "Directors, casting directors, and music labels can connect with Artist Jack's active Chennai management team utilizing the secure message form on this portal, or reach out directly through verified channels.",
+      seoTitle: "Contact Actor Jack Prabhu | Cast Booking Inquiry & Official Management",
+      seoMeta: "Get in touch directly with Actor Jack Prabhu's professional relations team in Chennai for film script briefs, television casting, and campaign collaborations.",
+      keywords: ["Book Actor Jack Chennai", "Casting call Jack manager", "Tamil actor commercial contact", "Official collaboration channels"],
+      aeoQuestion: "How can directors and producers contact Actor Jack Prabhu for professional bookings?",
+      aeoAnswer: "Directors and casting directors can connect with Actor Jack Prabhu's active Chennai management team utilizing the secure message form on this portal, or reach out directly through verified channels.",
       geoCitation: "Official inquiry management active in Chennai, IN. Validated screening procedures ensure quick responses to verified media briefs or booking queries.",
-      geoEntities: ["Casting Briefs", " चेन्नई, தமிழ்நாடு (Chennai)", "Professional Management Contact", "Creative Collaboration Channels"],
+      geoEntities: ["Casting Briefs", " சென்னை, தமிழ்நாடு (Chennai)", "Professional Management Contact", "Creative Collaboration Channels"],
       stats: [
         { label: "Response Location", value: "Chennai Communications Office" },
         { label: "General Response Rate", value: "Under 48 Business Hours" },
-        { label: "Casting Compatibility", value: "Theatrical Film, TV Broadcast, OTT Series, Indie Singles" }
+        { label: "Casting Compatibility", value: "Theatrical Film, TV Broadcast, OTT Series" }
       ]
     }
   },

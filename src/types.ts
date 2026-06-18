@@ -24,9 +24,10 @@ export interface WebSeries {
 export interface VideoItem {
   id: string;
   title: string;
-  youtubeId: string;
-  thumbnailUrl: string;
-  category: 'Showreel' | 'Song' | 'Interview';
+  youtubeId?: string;
+  localUrl?: string;
+  thumbnailUrl?: string;
+  category: 'Showreel' | 'Song' | 'Interview' | string;
   duration?: string;
 }
 
@@ -70,6 +71,7 @@ export interface TVSerial {
   year: string;
   role: string;
   description: string;
+  imageUrl?: string;
 }
 
 export interface Award {

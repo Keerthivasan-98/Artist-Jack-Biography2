@@ -4,21 +4,44 @@ import { Trophy, Award as AwardIcon, Medal, Star, Calendar } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext';
 import { AeoSeoGeoSectionCard } from './AeoSeoGeoOptimizer';
 
+import newAwardImg1 from '../../assets/images/awards/1000133613.jpg';
+import newAwardImg2 from '../../assets/images/awards/1000133619.jpg';
+
 type AwardFilter = 'All' | 'Television' | 'Film' | 'Digital' | 'Music' | 'Special';
 
 export default function Awards() {
   const { t } = useLanguage();
   const [selectedFilter, setSelectedFilter] = useState<AwardFilter>('All');
 
-  const awardsList = (t('data.awards') as any[]) || [];
+  // Create content for the real image cards
+  const awardsList = [
+    {
+      id: 'award-real-1',
+      title: 'Cinematic Excellence Award',
+      category: 'Outstanding Achievement',
+      year: '2025',
+      description: 'Honored for exceptional versatility and profound impact in regional cinema, showcasing extraordinary dedication to the craft.',
+      filterType: 'Television',
+      image: newAwardImg1,
+    },
+    {
+      id: 'award-real-2',
+      title: 'Stellar Performer Trophy',
+      category: 'Best Breakthrough Act',
+      year: '2025',
+      description: 'Recognized by the academy for a breakthrough performance that captivated audiences with stunning emotional depth and realism.',
+      filterType: 'Special',
+      image: newAwardImg2,
+    }
+  ];
 
-  const filterTabs: { id: AwardFilter; label: string }[] = [
-    { id: 'All', label: t('awards.filter.all') },
-    { id: 'Television', label: t('awards.filter.television') },
-    { id: 'Film', label: t('awards.filter.film') },
-    { id: 'Digital', label: t('awards.filter.digital') },
-    { id: 'Music', label: t('awards.filter.music') },
-    { id: 'Special', label: t('awards.filter.special') },
+  const filterTabs: { id: AwardFilter; label: string; icon: string }[] = [
+    { id: 'All', label: t('awards.filter.all'), icon: '' },
+    { id: 'Television', label: t('awards.filter.television'), icon: '📺' },
+    { id: 'Film', label: t('awards.filter.film'), icon: '🎞️' },
+    { id: 'Digital', label: t('awards.filter.digital'), icon: '💻' },
+    { id: 'Music', label: t('awards.filter.music'), icon: '🎵' },
+    { id: 'Special', label: t('awards.filter.special'), icon: '🏆' },
   ];
 
   const filteredAwards = selectedFilter === 'All'
@@ -100,18 +123,21 @@ export default function Awards() {
               onClick={() => setSelectedFilter(tab.id)}
               className={`relative px-4 py-2 border rounded-full text-xs font-mono tracking-wider transition-all duration-300 whitespace-nowrap ${
                 selectedFilter === tab.id
-                  ? 'border-[#D4AF37] text-black font-semibold'
+                  ? 'border-[#D4AF37] text-[#D4AF37] font-semibold'
                   : 'border-white/5 bg-white/5 text-gray-400 hover:text-white hover:border-white/10'
               }`}
             >
               {selectedFilter === tab.id && (
                 <motion.span
                   layoutId="activeAwardsTab"
-                  className="absolute inset-0 bg-[#D4AF37] rounded-full z-0"
+                  className="absolute inset-0 bg-[#D4AF37]/10 rounded-full z-0 border border-[#D4AF37]"
                   transition={{ type: 'spring', stiffness: 350, damping: 28 }}
                 />
               )}
-              <span className="relative z-10">{tab.label}</span>
+              <span className="relative z-10 flex items-center gap-1.5 uppercase">
+                {tab.icon && <span>{tab.icon}</span>}
+                {tab.label}
+              </span>
             </motion.button>
           ))}
         </div>
@@ -127,7 +153,7 @@ export default function Awards() {
                 layout
                 key={award.id}
                 id={`award-card-${award.id}`}
-                className="group relative bg-[#0D0D0D]/80 border border-white/5 rounded-2xl p-6 sm:p-8 hover:border-yellow-500/15 hover:bg-[#121212]/50 transition-all duration-500 shadow-xl flex flex-col justify-between"
+                className="group relative overflow-hidden bg-[#0D0D0D]/80 border border-white/5 rounded-2xl p-6 sm:p-8 hover:border-yellow-500/15 hover:bg-[#121212]/50 transition-all duration-500 shadow-xl flex flex-col justify-between"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
@@ -138,10 +164,16 @@ export default function Awards() {
                 <div className="absolute -inset-px rounded-2xl bg-[#D4AF37]/5 opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none" />
 
                 <div>
-                  {/* Award image/logo placeholder container */}
-                  <div className="w-14 h-14 rounded-xl border border-yellow-500/25 bg-yellow-500/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-500 shadow-[0_0_15px_rgba(212,175,55,0.05)] group-hover:shadow-[0_0_20px_rgba(212,175,55,0.15)]">
-                    {getAwardIcon(award.filterType)}
-                  </div>
+                  {/* Award image/logo container */}
+                  {award.image ? (
+                    <div className="w-full h-72 rounded-xl border border-yellow-500/25 bg-black/40 flex items-center justify-center mb-6 overflow-hidden shadow-[0_0_15px_rgba(212,175,55,0.05)] group-hover:shadow-[0_0_20px_rgba(212,175,55,0.15)]">
+                      <img src={award.image} alt={award.title} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" />
+                    </div>
+                  ) : (
+                    <div className="w-14 h-14 rounded-xl border border-yellow-500/25 bg-yellow-500/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-500 shadow-[0_0_15px_rgba(212,175,55,0.05)] group-hover:shadow-[0_0_20px_rgba(212,175,55,0.15)]">
+                      {getAwardIcon(award.filterType)}
+                    </div>
+                  )}
 
                   {/* Year Tag & Category */}
                   <div className="flex items-center gap-2 mb-3">
@@ -173,6 +205,9 @@ export default function Awards() {
                     Industry Recognition
                   </span>
                 </div>
+
+                {/* Accent border at card bottom */}
+                <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-yellow-600 to-[#D4AF37] group-hover:w-full transition-all duration-500 z-50" />
               </motion.div>
             ))}
           </AnimatePresence>

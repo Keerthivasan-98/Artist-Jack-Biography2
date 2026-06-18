@@ -7,8 +7,9 @@ import { AeoSeoGeoSectionCard } from './AeoSeoGeoOptimizer';
 export default function Media() {
   const { t, media, videos } = useLanguage();
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
+  const [showAllVideos, setShowAllVideos] = useState(false);
 
-  const activeVideo = videos.find((v) => v.youtubeId === activeVideoId);
+  const activeVideo = videos.find((v) => v.id === activeVideoId);
 
   return (
     <section
@@ -22,20 +23,46 @@ export default function Media() {
         
         {/* ==================== SUB-SECTION 1: VIDEOS & REELS ==================== */}
         <div className="mb-24">
-          <div className="text-center md:text-left mb-16">
-            <p className="text-xs font-mono font-medium tracking-[0.3em] text-[#D4AF37] uppercase mb-3">
-              {t('videos.reels') || 'Reels & Videos'}
-            </p>
-            <h2 className="text-3xl md:text-5xl font-bold font-serif text-white tracking-tight leading-none">
-              {t('videos.title') || 'Featured Videos'}<span className="text-[#D4AF37]">.</span>
-            </h2>
-            <div className="w-16 h-[2px] bg-[#D4AF37] mt-6 mx-auto md:mx-0" />
+          <div className="text-left mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-yellow-500/20 bg-yellow-500/5 mb-4"
+            >
+              <Video size={14} className="text-[#D4AF37]" />
+              <span className="text-[10px] font-mono tracking-widest text-[#D4AF37] uppercase font-semibold">
+                {t('videos.reels') || 'Reels & Videos'}
+              </span>
+            </motion.div>
+            
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold tracking-tight text-white mb-6 text-left"
+            >
+              {t('videos.title') || 'Featured Videos'}
+            </motion.h2>
+            
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-sm sm:text-base text-gray-400 font-sans leading-relaxed text-left max-w-3xl"
+            >
+              {t('videos.desc')}
+            </motion.p>
           </div>
 
           {/* Video Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {videos.map((video, index) => {
-              const isSong = video.category === 'Song' || video.category === 'பாடல்' || video.category === 'গান' || video.category === 'പാട്ട്';
+            <AnimatePresence mode="popLayout">
+              {(showAllVideos ? videos : videos.slice(0, 10)).map((video, index) => {
+                const isSong = video.category === 'Song' || video.category === 'பாடல்' || video.category === 'গান' || video.category === 'പാട്ട്';
               const isInterview = video.category === 'Interview' || video.category === 'நேர்காணல்' || video.category === 'അഭിമുഖം';
               return (
                 <motion.div
@@ -51,11 +78,11 @@ export default function Media() {
                   {/* Video Cover Aspect Box */}
                   <div
                     className="relative aspect-video w-full overflow-hidden bg-[#121212] cursor-pointer"
-                    onClick={() => setActiveVideoId(video.youtubeId)}
+                    onClick={() => setActiveVideoId(video.id)}
                   >
                     
                     {/* Glass overlays */}
-                    <div className="absolute inset-0 bg-[#0A0A0A]/40 group-hover:bg-[#0A0A0A]/25 transition-all duration-500 z-10" />
+                    <div className="absolute inset-0 bg-[#0A0A0A]/10 group-hover:bg-[#0A0A0A]/40 transition-all duration-500 z-10" />
                     
                     {/* Category Pill Tag */}
                     <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 bg-black/80 border border-white/10 px-2.5 py-1 rounded-full text-[10px] font-mono tracking-widest text-[#D4AF37] uppercase">
@@ -83,31 +110,69 @@ export default function Media() {
                     </div>
 
                     {/* Picture Thumbnail Cover */}
-                    <img
-                      src={video.thumbnailUrl}
-                      alt={`${video.title} Video Thumbnail`}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-none"
-                      referrerPolicy="no-referrer"
-                    />
+                    {video.thumbnailUrl && (
+                      <img
+                        src={video.thumbnailUrl}
+                        alt={`${video.title} Video Thumbnail`}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-none"
+                        referrerPolicy="no-referrer"
+                      />
+                    )}
+                    {video.localUrl && !video.thumbnailUrl && (
+                      <video
+                        src={`${video.localUrl}#t=2.0`}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-none"
+                        muted
+                        playsInline
+                        preload="metadata"
+                      />
+                    )}
                   </div>
 
                   {/* Info Text Box */}
                   <div className="p-5 flex flex-col items-start text-left flex-grow">
                     <h4
-                      onClick={() => setActiveVideoId(video.youtubeId)}
+                      onClick={() => setActiveVideoId(video.id)}
                       className="text-base font-serif font-bold text-white hover:text-[#D4AF37] cursor-pointer transition-colors line-clamp-2 leading-snug mb-2"
                     >
                       {video.title}
                     </h4>
                     <p className="text-xs text-gray-400 mt-auto flex items-center gap-1 font-mono">
                       <Film size={11} className="text-[#D4AF37]" />
-                      YouTube Embed Video • Free Streaming
+                      {video.youtubeId ? 'YouTube Embed Video • Free Streaming' : 'Featured Video • Free Streaming'}
                     </p>
                   </div>
+
+                  {/* Accent border at card bottom */}
+                  <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-yellow-600 to-[#D4AF37] group-hover:w-full transition-all duration-500 z-50" />
                 </motion.div>
               );
             })}
+            </AnimatePresence>
           </div>
+
+          {/* Show More / Show Less Toggle Button */}
+          {videos.length > 10 && (
+            <div className="mt-12 flex justify-center">
+              <button
+                onClick={() => {
+                  if (showAllVideos) {
+                    setShowAllVideos(false);
+                    const mediaSection = document.getElementById('media');
+                    if (mediaSection) {
+                      const offsetTop = mediaSection.offsetTop - 80;
+                      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+                    }
+                  } else {
+                    setShowAllVideos(true);
+                  }
+                }}
+                className="px-6 py-2.5 border border-[#D4AF37]/30 bg-[#D4AF37]/5 hover:bg-[#D4AF37]/10 text-[#D4AF37] font-mono tracking-widest text-xs uppercase rounded-full transition-all duration-300 shadow-[0_0_15px_rgba(212,175,55,0.05)] hover:shadow-[0_0_20px_rgba(212,175,55,0.15)] flex items-center gap-2"
+              >
+                {showAllVideos ? 'Show Less' : 'Show All Videos'}
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Divider line */}
@@ -115,14 +180,39 @@ export default function Media() {
 
         {/* ==================== SUB-SECTION 3: PRESS COVERAGE ==================== */}
         <div>
-          <div className="text-center md:text-left mb-16">
-            <p className="text-xs font-mono font-medium tracking-[0.3em] text-[#D4AF37] uppercase mb-3">
-              {t('media.press') || 'Press Mentions'}
-            </p>
-            <h2 className="text-3xl md:text-5xl font-bold font-serif text-white tracking-tight leading-none">
-              {t('media.title') || 'Media Coverage'}<span className="text-[#D4AF37]">.</span>
-            </h2>
-            <div className="w-16 h-[2px] bg-[#D4AF37] mt-6 mx-auto md:mx-0" />
+          <div className="text-left mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-yellow-500/20 bg-yellow-500/5 mb-4"
+            >
+              <Newspaper size={14} className="text-[#D4AF37]" />
+              <span className="text-[10px] font-mono tracking-widest text-[#D4AF37] uppercase font-semibold">
+                {t('media.press') || 'Press Mentions'}
+              </span>
+            </motion.div>
+            
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold tracking-tight text-white mb-6 text-left"
+            >
+              {t('media.title') || 'Media Coverage'}
+            </motion.h2>
+            
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-sm sm:text-base text-gray-400 font-sans leading-relaxed text-left max-w-3xl"
+            >
+              {t('media.desc')}
+            </motion.p>
           </div>
 
           {/* Media Mentions Layout */}
@@ -133,7 +223,7 @@ export default function Media() {
                 <motion.div
                   key={item.id}
                   id={`media-item-${item.id}`}
-                  className="group relative flex flex-col bg-[#121212]/30 border border-white/5 hover:border-yellow-500/20 p-8 rounded-2xl backdrop-blur-sm shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[#D4AF37]/5"
+                  className="group relative overflow-hidden flex flex-col bg-[#121212]/30 border border-white/5 hover:border-yellow-500/20 p-8 rounded-2xl backdrop-blur-sm shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[#D4AF37]/5"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-50px' }}
@@ -178,6 +268,9 @@ export default function Media() {
 
                   {/* Accent glow on top header corner */}
                   <div className="absolute top-0 right-12 w-12 h-[2px] bg-gradient-to-r from-transparent to-[#D4AF37] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                  {/* Accent border at card bottom */}
+                  <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-yellow-600 to-[#D4AF37] group-hover:w-full transition-all duration-500 z-50" />
                 </motion.div>
               );
             })}
@@ -252,13 +345,22 @@ export default function Media() {
 
                 {/* Active Video Player Screen */}
                 <div className="relative w-full aspect-video">
-                  <iframe
-                    src={`https://www.youtube.com/embed/${activeVideoId}?autoplay=1&rel=0`}
-                    title={activeVideo.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    className="absolute inset-0 w-full h-full border-0"
-                  />
+                  {activeVideo.youtubeId ? (
+                    <iframe
+                      src={`https://www.youtube.com/embed/${activeVideo.youtubeId}?autoplay=1&rel=0`}
+                      title={activeVideo.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      className="absolute inset-0 w-full h-full border-0"
+                    />
+                  ) : activeVideo.localUrl ? (
+                    <video
+                      src={activeVideo.localUrl}
+                      controls
+                      autoPlay
+                      className="absolute inset-0 w-full h-full border-0 outline-none bg-black"
+                    />
+                  ) : null}
                 </div>
               </motion.div>
             </motion.div>
